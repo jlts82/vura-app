@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=True
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=vura
+      - POSTGRES_PASSWORD=vura
+      - POSTGRES_DB=vura_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
